@@ -1,0 +1,62 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.245.2/containers/docker-existing-docker-compose
+// If you want to run as a non-root user in the container, see .devcontainer/docker-compose.yml.
+{
+	"name": "Existing Docker Compose (Extend)",
+	// Update the 'dockerComposeFile' list if you have more compose files or use different names.
+	// The .devcontainer/docker-compose.yml file contains any overrides you need/want to make.
+	"dockerComposeFile": [
+		"../docker-compose.yml"
+	],
+	// The 'service' property is the name of the service for the container that VS Code should
+	// use. Update this value and .devcontainer/docker-compose.yml to the real service name.
+	"service": "eccube",
+	// The optional 'workspaceFolder' property is the path VS Code should open by default when
+	// connected. This is typically a file mount in .devcontainer/docker-compose.yml
+	"workspaceFolder": "/var/data/ec-cube",
+	"settings": {
+		"launch": {
+			"version": "0.2.0",
+			"configurations": [
+				{
+					"name": "XDebug on docker", // お好きな名前
+					"type": "php", // 今回はPHPなので
+					"request": "launch",
+					"port": 9003, // portはxdebug.iniで設定したportと一緒にする
+					"stopOnEntry": false // デバッグが有効なときにプログラムを中断する
+				}
+			],
+			"compounds": []
+		},
+		"[php]": {
+			"editor.defaultFormatter": "mansoorkhan96.php-cs-fixer"
+		},
+		"editor.formatOnSave": true,
+		"editor.formatOnPaste": true,
+		"gitlens.defaultTimeFormat": "HH:mm:ss",
+		"workbench.iconTheme": "material-icon-theme"
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"vscode-icons-team.vscode-icons", // vscode-icons
+				"PKief.material-icon-theme", // Material Icon Theme
+				"onecentlin.php-productive-pack", // PHP Productive Pack
+				"xdebug.php-debug", // PHP Debug
+				"vinirossa.vscode-gitandgithub-pack" // Git & GitHub Extension Pack
+			]
+		}
+	},
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	"forwardPorts": [
+		9003
+	]
+	// Uncomment the next line if you want start specific services in your Docker Compose config.
+	// "runServices": [],
+	// Uncomment the next line if you want to keep your containers running after VS Code shuts down.
+	// "shutdownAction": "none",
+	// Uncomment the next line to run commands after the container is created - for example installing curl.
+	// "postCreateCommand": "apt-get update && apt-get install -y curl",
+	// Uncomment to connect as a non-root user if you've added one. See https://aka.ms/vscode-remote/containers/non-root.
+	// "remoteUser": "vscode"
+}
